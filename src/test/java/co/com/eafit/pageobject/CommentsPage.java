@@ -33,19 +33,16 @@ public class CommentsPage extends PageObject{
 		//Se debe de indicar pues la pagina tiene un frameset
 		getDriver().switchTo().frame(0);
 		
-		List<List<String>> commentList = dtTable.asLists(String.class);
-		//for (int i = 0; i < commentList.size(); i++) {
-			txtName.sendKeys(commentList.get(1).get(0));
-			txtEmail.sendKeys(commentList.get(1).get(1));
-			txtPhonenumber.sendKeys(commentList.get(1).get(2));
-			txtCity.sendKeys(commentList.get(1).get(3));
-			txtComment.sendKeys(commentList.get(1).get(4));
-		//}
+		List<List<String>> commentList = dtTable.raw();
+		txtName.sendKeys(commentList.get(1).get(0));
+		txtEmail.sendKeys(commentList.get(1).get(1));
+		txtPhonenumber.sendKeys(commentList.get(1).get(2));
+		txtCity.sendKeys(commentList.get(1).get(3));
+		txtComment.sendKeys(commentList.get(1).get(4));
 		btnSend.click();
 	}
 
 	public void assertSuccess(String message) {
 		assertThat(message, Matchers.containsString(lblMessage.getText()));
 	}
-	
 }
